@@ -1,6 +1,8 @@
 #set env vars
 set -o allexport; source .env; set +o allexport;
 
+echo "Generating random keys ..."
+
 #this one is read in .env
 #JWT_SECRET=homx64qq7dzz12750u8o1rqtw1syj4k9vcj8foew
 

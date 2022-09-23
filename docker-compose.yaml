@@ -6,7 +6,7 @@ services:
     image: supabase/studio:latest
     restart: unless-stopped
     ports:
-      - 172.17.0.1:${STUDIO_PORT}:3000
+      - 172.17.0.1:3580:3000
     environment:
       STUDIO_PG_META_URL: http://meta:8080
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

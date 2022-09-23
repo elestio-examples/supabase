@@ -2,7 +2,7 @@ ports:
   - protocol: "HTTPS"
     targetProtocol: "HTTP"
     listeningPort: "443"
-    targetPort: "3000"
+    targetPort: "3580"
     targetIP: "172.17.0.1"
     public: true
     path: "/"
@@ -79,9 +79,7 @@ environments:
   - key: "ENABLE_PHONE_SIGNUP"
     value: "true"
   - key: "ENABLE_PHONE_AUTOCONFIRM"
-    value: "true"
-  - key: "STUDIO_PORT"
-    value: "3000"                    
+    value: "true"               
   - key: "PUBLIC_REST_URL"
     value: "https://[CI_CD_DOMAIN]:27443/rest/v1/"                    
 config:
