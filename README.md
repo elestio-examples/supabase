@@ -16,8 +16,8 @@ You can can open Supabase Studio here:
 
 The rest API is available here:
 
-    URL: https://[CI_CD_DOMAIN]:27443/rest/v1/
-
+    Base URL: https://[CI_CD_DOMAIN]:27443
+    REST API URL: https://[CI_CD_DOMAIN]:27443/rest/v1/
 
 # Documentation
 
