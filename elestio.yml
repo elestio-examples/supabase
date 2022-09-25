@@ -1,7 +1,7 @@
 ports:
   - protocol: "HTTPS"
     targetProtocol: "HTTP"
-    listeningPort: "443"
+    listeningPort: "27443"
     targetPort: "3580"
     targetIP: "172.17.0.1"
     public: true
@@ -11,7 +11,7 @@ ports:
     password: "random_password"
   - protocol: "HTTPS"
     targetProtocol: "HTTP"
-    listeningPort: "27443"
+    listeningPort: "443"
     targetPort: "8000"
     targetIP: "172.17.0.1"
     public: true
@@ -51,7 +51,7 @@ environments:
   - key: "DISABLE_SIGNUP"
     value: "false"      
   - key: "API_EXTERNAL_URL"
-    value: "https://[CI_CD_DOMAIN]:27443"   
+    value: "https://[CI_CD_DOMAIN]"   
   - key: "MAILER_URLPATHS_CONFIRMATION"
     value: "/auth/v1/verify"  
   - key: "MAILER_URLPATHS_INVITE"
@@ -81,7 +81,7 @@ environments:
   - key: "ENABLE_PHONE_AUTOCONFIRM"
     value: "true"               
   - key: "PUBLIC_REST_URL"
-    value: "https://[CI_CD_DOMAIN]:27443/rest/v1/"                    
+    value: "https://[CI_CD_DOMAIN]/rest/v1/"                    
 config:
   runTime: "dockerCompose"
   version: ""
