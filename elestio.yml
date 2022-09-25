@@ -23,7 +23,7 @@ environments:
   - key: "POSTGRES_PASSWORD"
     value: "random_password"
   - key: "JWT_SECRET"
-    value: "JWT_SECRET_RANDOM"
+    value: "random_password_random_password"
   - key: "ANON_KEY"
     value: "ANON_KEY_RANDOM"
   - key: "SERVICE_ROLE_KEY"
