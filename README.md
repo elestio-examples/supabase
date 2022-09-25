@@ -5,6 +5,9 @@
 
 Deploy Supabase on Elestio.
 
+<img src="supase_screenshot1.jpg" style='width: 100%;'/>
+<br/>
+<br/>
 
 # Once deployed ...
 
@@ -18,6 +21,9 @@ The rest API is available here:
 
     Base URL: https://[CI_CD_DOMAIN]
     REST API URL: https://[CI_CD_DOMAIN]/rest/v1/
+
+
+You can deploy multiple instances of Supabase to the same CI/CD target, each instance is a different app with different credentials
 
 # Documentation
 

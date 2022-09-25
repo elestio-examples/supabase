@@ -89,8 +89,8 @@ config:
   buildCommand: "docker-compose build"
   buildDir: "/"
   runCommand: "docker-compose up -d"
-  icon: "wordpress.svg"
-  screenshot: "screenshot.png"
+  icon: ""
+  screenshot: "supase_screenshot1.jpg"
 lifeCycleConfig:
   preInstallCommand: "./scripts/preInstall.sh"
   postInstallCommand: "./scripts/postInstall.sh"
