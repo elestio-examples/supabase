@@ -2,7 +2,7 @@
 set -o allexport; source .env; set +o allexport;
 
 apt install nodejs npm -y
-npm install --prefix ./scripts/JWT/ jsonwebtoken
+npm install --prefix ./scripts/JWT/ jsonwebtoken@8.5.1
 
 echo "Generating random keys ..."
 JWT_ANON_KEY=$(JWT_SECRET=$JWT_SECRET node ./scripts/JWT/jwt.js anon);
