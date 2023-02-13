@@ -10,6 +10,8 @@ JWT_SERVICE_KEY=$(JWT_SECRET=$JWT_SECRET node ./scripts/JWT/jwt.js service_role)
 
 sed -i "s/ANON_KEY_RANDOM/$JWT_ANON_KEY/g" ./volumes/api/kong.yml
 sed -i "s/SERVICE_ROLE_KEY_RANDOM/$JWT_SERVICE_KEY/g" ./volumes/api/kong.yml
+sed -i "s/POSTGRES_USER/$POSTGRES_USER/g" ./volumes/db/realtime.sql
+sed -i "s/POSTGRES_PASSWORD/$POSTGRES_PASSWORD/g" ./volumes/db/roles.sql
 
 
 echo "SUPABASE_ANON_KEY=$JWT_ANON_KEY" >> ./keys.env
