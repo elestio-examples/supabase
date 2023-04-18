@@ -11,7 +11,7 @@ Deploy Supabase on Elestio.
 
 # Once deployed ...
 
-You can can open Supabase Studio here:
+You can open Supabase Studio here:
 
     https://[CI_CD_DOMAIN]:27443/
     Login: root (set in reverse proxy)
