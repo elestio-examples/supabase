@@ -41,8 +41,7 @@ You can try it both post and get examples here:
         --header 'Content-Type: application/json' \
         --data-raw '{
         "name":"root"
-
-}'
+        }'
 
 ## GET
 
