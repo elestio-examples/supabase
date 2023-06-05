@@ -45,7 +45,7 @@ You can try it both post and get examples here:
 
 ## GET
 
-    curl https://supabasedfd-u353.vm.elestio.app/functions/v1/hello
+    curl https://[CI_CD_DOMAIN]/functions/v1/hello
 
 # Edge documentation
 
