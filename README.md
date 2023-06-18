@@ -21,6 +21,9 @@ The rest API is available here:
     Base URL: https://[CI_CD_DOMAIN]
     REST API URL: https://[CI_CD_DOMAIN]/rest/v1/
 
+
+`SUPABASE_KEY` can be found in `./keys.env`
+
 You can deploy multiple instances of Supabase to the same CI/CD target, each instance is a different app with different credentials
 
 # Documentation
