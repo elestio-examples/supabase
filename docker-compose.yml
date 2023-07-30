@@ -3,7 +3,7 @@ version: "3.3"
 services:
   studio:
     #container_name: supabase-studio
-    image: supabase/studio:20230127-6bfd87b
+    image: supabase/studio:20230729-a7e6617
     restart: unless-stopped
     ports:
       - 172.17.0.1:3580:3000
@@ -39,7 +39,7 @@ services:
 
   auth:
     #container_name: supabase-auth
-    image: supabase/gotrue:v2.40.1
+    image: supabase/gotrue:v2.86.0
     depends_on:
       - db # Disable this if you are using an external Postgres database
     restart: unless-stopped
@@ -92,7 +92,7 @@ services:
 
   realtime:
     #container_name: supabase-realtime
-    image: supabase/realtime:v2.1.0
+    image: supabase/realtime:v2.19.1
     depends_on:
       - db # Disable this if you are using an external Postgres database
     restart: unless-stopped
@@ -123,7 +123,7 @@ services:
 
   storage:
     #container_name: supabase-storage
-    image: supabase/storage-api:v0.26.1
+    image: supabase/storage-api:v0.41.3
     depends_on:
       - db # Disable this if you are using an external Postgres database
       - rest
@@ -149,7 +149,7 @@ services:
 
   meta:
     #container_name: supabase-meta
-    image: supabase/postgres-meta:v0.59.0
+    image: supabase/postgres-meta:v0.67.0
     depends_on:
       - db # Disable this if you are using an external Postgres database
     restart: unless-stopped
@@ -163,7 +163,7 @@ services:
 
   functions:
     # container_name: supabase-edge-functions
-    image: supabase/edge-runtime:v1.2.12
+    image: supabase/edge-runtime:v1.7.2
     restart: always
     environment:
       JWT_SECRET: ${JWT_SECRET}
