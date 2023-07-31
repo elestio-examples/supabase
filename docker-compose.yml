@@ -27,6 +27,7 @@ services:
     restart: always
     ports:
       - 172.17.0.1:8007:8000
+      - 172.17.0.1:8008:8000
       #- 172.17.0.1:8443:8443
     environment:
       KONG_DATABASE: "off"
