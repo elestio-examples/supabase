@@ -4,7 +4,7 @@ services:
   studio:
     #container_name: supabase-studio
     image: supabase/studio:20230729-a7e6617
-    restart: unless-stopped
+    restart: always
     ports:
       - 172.17.0.1:3580:3000
     env_file:
@@ -24,7 +24,7 @@ services:
   kong:
     #container_name: supabase-kong
     image: kong:2.8.1
-    restart: unless-stopped
+    restart: always
     ports:
       - 172.17.0.1:8000:8000
       #- 172.17.0.1:8443:8443
@@ -42,7 +42,7 @@ services:
     image: supabase/gotrue:v2.86.0
     depends_on:
       - db # Disable this if you are using an external Postgres database
-    restart: unless-stopped
+    restart: always
     environment:
       GOTRUE_API_HOST: 0.0.0.0
       GOTRUE_API_PORT: 9999
@@ -82,7 +82,7 @@ services:
     image: postgrest/postgrest:v9.0.1.20220717
     depends_on:
       - db # Disable this if you are using an external Postgres database
-    restart: unless-stopped
+    restart: always
     environment:
       PGRST_DB_URI: postgres://authenticator:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
       PGRST_DB_SCHEMAS: ${PGRST_DB_SCHEMAS}
@@ -95,7 +95,7 @@ services:
     image: supabase/realtime:v2.19.1
     depends_on:
       - db # Disable this if you are using an external Postgres database
-    restart: unless-stopped
+    restart: always
     environment:
       DB_HOST: ${POSTGRES_HOST}
       DB_PORT: ${POSTGRES_PORT}
@@ -123,11 +123,11 @@ services:
 
   storage:
     #container_name: supabase-storage
-    image: supabase/storage-api:v0.41.3
+    image: supabase/storage-api:v0.26.1
     depends_on:
       - db # Disable this if you are using an external Postgres database
       - rest
-    restart: unless-stopped
+    restart: always
     env_file:
       - keys.env
     environment:
@@ -152,7 +152,7 @@ services:
     image: supabase/postgres-meta:v0.67.0
     depends_on:
       - db # Disable this if you are using an external Postgres database
-    restart: unless-stopped
+    restart: always
     environment:
       PG_META_PORT: 8080
       PG_META_DB_HOST: ${POSTGRES_HOST}
@@ -190,7 +190,7 @@ services:
       - config_file=/etc/postgresql/postgresql.conf
       - -c
       - log_min_messages=fatal # prevents Realtime polling queries from appearing in logs
-    restart: unless-stopped
+    restart: always
     ports:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
       # - 5432:5432
