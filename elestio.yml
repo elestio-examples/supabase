@@ -88,6 +88,10 @@ environments:
     value: "Default"
   - key: "SUPABASE_PUBLIC_URL"
     value: "https://[CI_CD_DOMAIN]:8000"
+  - key: "KONG_PORT_1"
+    value: "8007"
+  - key: "KONG_PORT_1"
+    value: "8008"
 config:
   runTime: "dockerCompose"
   version: ""
