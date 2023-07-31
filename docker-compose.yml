@@ -26,8 +26,8 @@ services:
     image: kong:2.8.1
     restart: always
     ports:
-      - 172.17.0.1:${KONG_PORT_1}:8000
-      - 172.17.0.1:${KONG_PORT_2}:8000
+      - 172.17.0.1:KONG_PORT_1:8000
+      - 172.17.0.1:KONG_PORT_2:8000
       #- 172.17.0.1:8443:8443
     environment:
       KONG_DATABASE: "off"
