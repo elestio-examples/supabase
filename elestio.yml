@@ -88,6 +88,8 @@ environments:
     value: "Default"
   - key: "SUPABASE_PUBLIC_URL"
     value: "https://[CI_CD_DOMAIN]:8000"
+  - key: "IMGPROXY_ENABLE_WEBP_DETECTION"
+    value: "true"
 config:
   runTime: "dockerCompose"
   version: ""
