@@ -12,7 +12,7 @@ Deploy Supabase on Elestio.
 
 You can open Supabase Studio here:
 
-    https://[CI_CD_DOMAIN]:27443/
+    https://[CI_CD_DOMAIN]
     Login: root (set in reverse proxy)
     password: [ADMIN_PASSWORD] (set in reverse proxy)
 
@@ -20,7 +20,6 @@ The rest API is available here:
 
     Base URL: https://[CI_CD_DOMAIN]
     REST API URL: https://[CI_CD_DOMAIN]/rest/v1/
-
 
 `SUPABASE_KEY` can be found in `./keys.env`
 
