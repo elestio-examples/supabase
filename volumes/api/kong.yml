@@ -1,9 +1,11 @@
-_format_version: "1.1"
+_format_version: "2.1"
+_transform: true
 
 ###
 ### Consumers / Users
 ###
 consumers:
+  - username: DASHBOARD
   - username: anon
     keyauth_credentials:
       - key: ANON_KEY_RANDOM
@@ -19,6 +21,14 @@ acls:
     group: anon
   - consumer: service_role
     group: admin
+
+###
+### Dashboard credentials
+###
+basicauth_credentials:
+  - consumer: DASHBOARD
+    username: $DASHBOARD_USERNAME
+    password: $DASHBOARD_PASSWORD
 
 ###
 ### API Routes
@@ -122,14 +132,35 @@ services:
             - anon
 
   ## Secure Realtime routes
-  - name: realtime-v1
+  - name: realtime-v1-ws
     _comment: "Realtime: /realtime/v1/* -> ws://realtime:4000/socket/*"
-    url: http://realtime-dev.supabase-realtime:4000/socket/
+    url: http://realtime-dev.supabase-realtime:4000/socket
+    protocol: ws
     routes:
-      - name: realtime-v1-all
+      - name: realtime-v1-ws
         strip_path: true
         paths:
           - /realtime/v1/
+    plugins:
+      - name: cors
+      - name: key-auth
+        config:
+          hide_credentials: false
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - admin
+            - anon
+  - name: realtime-v1-rest
+    _comment: "Realtime: /realtime/v1/* -> ws://realtime:4000/socket/*"
+    url: http://realtime-dev.supabase-realtime:4000/api
+    protocol: http
+    routes:
+      - name: realtime-v1-rest
+        strip_path: true
+        paths:
+          - /realtime/v1/api
     plugins:
       - name: cors
       - name: key-auth
@@ -184,3 +215,18 @@ services:
           hide_groups_header: true
           allow:
             - admin
+
+  ## Protected Dashboard - catch all remaining routes
+  - name: dashboard
+    _comment: "Studio: /* -> http://studio:3000/*"
+    url: http://studio:3000/
+    routes:
+      - name: dashboard-all
+        strip_path: true
+        paths:
+          - /
+    plugins:
+      - name: cors
+      - name: basic-auth
+        config:
+          hide_credentials: true

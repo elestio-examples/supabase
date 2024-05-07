@@ -6,9 +6,7 @@ ports:
     targetIP: "172.17.0.1"
     public: true
     path: "/"
-    isAuth: true
-    login: "root"
-    password: "random_password"
+    isAuth: false
   - protocol: "HTTPS"
     targetProtocol: "HTTP"
     listeningPort: "443"
@@ -106,3 +104,8 @@ lifeCycleConfig:
   postBackupCommand: "./scripts/postBackup.sh"
   preRestoreCommand: "./scripts/preRestore.sh"
   postRestoreCommand: "./scripts/postRestore.sh"
+webUI:
+  - url: "https://[CI_CD_DOMAIN]:27443"
+    label: "Supabase"
+    login: "root"
+    password: "[ADMIN_PASSWORD]"

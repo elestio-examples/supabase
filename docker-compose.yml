@@ -3,7 +3,7 @@ version: "3.3"
 services:
   studio:
     #container_name: supabase-studio
-    image: supabase/studio:20230803-15c6762
+    image: supabase/studio:20240422-5cf8f30
     restart: always
     ports:
       - 172.17.0.1:3580:3000
@@ -34,13 +34,17 @@ services:
       KONG_DECLARATIVE_CONFIG: /var/lib/kong/kong.yml
       # https://github.com/supabase/cli/issues/14
       KONG_DNS_ORDER: LAST,A,CNAME
-      KONG_PLUGINS: request-transformer,cors,key-auth,acl
+      KONG_PLUGINS: request-transformer,cors,key-auth,acl,basic-auth
+      KONG_NGINX_PROXY_PROXY_BUFFER_SIZE: 160k
+      KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
+      DASHBOARD_USERNAME: root
+      DASHBOARD_PASSWORD: ${ADMIN_PASSWORD}
     volumes:
       - ./volumes/api:/var/lib/kong:ro
 
   auth:
     #container_name: supabase-auth
-    image: supabase/gotrue:v2.86.0
+    image: supabase/gotrue:v2.149.0
     depends_on:
       - db # Disable this if you are using an external Postgres database
     restart: always
@@ -80,7 +84,7 @@ services:
 
   rest:
     #container_name: supabase-rest
-    image: postgrest/postgrest:v11.1.0
+    image: postgrest/postgrest:v12.0.1
     depends_on:
       - db # Disable this if you are using an external Postgres database
     restart: always
@@ -90,10 +94,13 @@ services:
       PGRST_DB_ANON_ROLE: anon
       PGRST_JWT_SECRET: ${JWT_SECRET}
       PGRST_DB_USE_LEGACY_GUCS: "false"
+      PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
+      PGRST_APP_SETTINGS_JWT_EXP: ${JWT_EXPIRY}
+    command: "postgrest"
 
   realtime:
     #container_name: supabase-realtime
-    image: supabase/realtime:v2.19.1
+    image: supabase/realtime:v2.28.32
     depends_on:
       - db # Disable this if you are using an external Postgres database
     restart: always
@@ -124,10 +131,11 @@ services:
 
   storage:
     #container_name: supabase-storage
-    image: supabase/storage-api:v0.41.5
+    image: supabase/storage-api:v1.0.6
     depends_on:
       - db # Disable this if you are using an external Postgres database
       - rest
+      - imgproxy
     restart: always
     env_file:
       - keys.env
@@ -162,7 +170,7 @@ services:
 
   meta:
     #container_name: supabase-meta
-    image: supabase/postgres-meta:v0.67.0
+    image: supabase/postgres-meta:v0.80.0
     depends_on:
       - db # Disable this if you are using an external Postgres database
     restart: always
@@ -176,7 +184,7 @@ services:
 
   functions:
     # container_name: supabase-edge-functions
-    image: supabase/edge-runtime:v1.9.0
+    image: supabase/edge-runtime:v1.45.2
     restart: always
     environment:
       JWT_SECRET: ${JWT_SECRET}
@@ -196,7 +204,7 @@ services:
   # Comment out everything below this point if you are using an external Postgres database
   db:
     #container_name: supabase-db
-    image: supabase/postgres:15.1.0.109
+    image: supabase/postgres:15.1.1.41
     command:
       - postgres
       - -c
@@ -216,6 +224,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATABASE: ${POSTGRES_DB}
       POSTGRES_DB: ${POSTGRES_DB}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXP: ${JWT_EXPIRY}
     volumes:
       - ./volumes/db/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z
       - ./volumes/db/webhooks.sql:/docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql:Z
