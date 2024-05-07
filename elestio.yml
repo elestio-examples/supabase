@@ -1,24 +1,8 @@
 ports:
   - protocol: "HTTPS"
     targetProtocol: "HTTP"
-    listeningPort: "27443"
-    targetPort: "3580"
-    targetIP: "172.17.0.1"
-    public: true
-    path: "/"
-    isAuth: false
-  - protocol: "HTTPS"
-    targetProtocol: "HTTP"
     listeningPort: "443"
     targetPort: "8007"
-    targetIP: "172.17.0.1"
-    public: true
-    path: "/"
-    isAuth: false
-  - protocol: "HTTPS"
-    targetProtocol: "HTTP"
-    listeningPort: "8000"
-    targetPort: "8008"
     targetIP: "172.17.0.1"
     public: true
     path: "/"
@@ -93,7 +77,7 @@ environments:
   - key: "DASHBOARD_PASSWORD"
     value: "random_password"
   - key: "KONG_HTTP_PORT"
-    value: "3580"
+    value: "8007"
   - key: "ENABLE_ANONYMOUS_USERS"
     value: "false"
   - key: "STUDIO_PORT"
