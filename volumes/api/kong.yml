@@ -172,7 +172,6 @@ services:
           allow:
             - admin
             - anon
-
   ## Storage routes: the storage server manages its own auth
   - name: storage-v1
     _comment: "Storage: /storage/v1/* -> http://storage:5000/*"
@@ -196,6 +195,16 @@ services:
           - /functions/v1/
     plugins:
       - name: cors
+
+  ## Analytics routes
+  - name: analytics-v1
+    _comment: "Analytics: /analytics/v1/* -> http://logflare:4000/*"
+    url: http://analytics:4000/
+    routes:
+      - name: analytics-v1-all
+        strip_path: true
+        paths:
+          - /analytics/v1/
 
   ## Secure Database routes
   - name: meta
