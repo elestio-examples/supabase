@@ -52,3 +52,50 @@ You can try it both post and get examples here:
 # Edge documentation
 
     https://supabase.com/docs/guides/functions
+
+# Multi users
+
+This README provides instructions for setting up custom basic authentication for multiple users on the self-hosted version of Supabase. Unlike the cloud version, there isn't email login functionality, but you can easily create custom basic authentication for your users by following the steps below.
+
+## Setup Instructions
+
+Follow these steps to add new users to your Elestio instance:
+
+1. Access Elestio's Dashboard:
+
+- Navigate to your Elestio's dashboard.
+- Click on the "Tools" tab.
+- Then, click on the "VS Code" button.
+
+2. Locate Configuration File:
+
+- In the opened VS Code interface, locate the volumes>api>kong.yml file.
+
+3. Add New User Credentials:
+
+- Scroll down to the "Dashboard credentials" section within the kong.yml file.
+- Below the existing credentials block (which typically contains placeholders like $DASHBOARD_USERNAME and $DASHBOARD_PASSWORD), add a new section for each new user you want to create.
+- Each new user section should follow the format:
+
+        - consumer: DASHBOARD
+          username: <username>
+          password: <password>
+
+4. Example Configuration:
+
+- After adding new user credentials, your kong.yml file might look like this:
+
+        - consumer: DASHBOARD
+          username: $DASHBOARD_USERNAME
+          password: $DASHBOARD_PASSWORD
+        - consumer: DASHBOARD
+          username: user2
+          password: test1234
+
+5. Restart your stack:
+
+- Open a new terminal window.
+- Execute the following commands to restart Elestio with the updated configuration:
+
+        docker-compose down
+        docker-compose up -d
